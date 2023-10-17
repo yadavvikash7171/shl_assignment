@@ -6,13 +6,14 @@ const mongoose = require("mongoose");
 const Project = require('./schema/project');
 const {mongo} = require('./config/env');
 const {corsOptions} = require('./config/env');
-const projectService = require('./services/projectService');
+// const projectService = require('./services/projectService');
+const router = require('./router/router');
 const app = express();
 const server = http.createServer(app);
 const PORT = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
-
+app.use(router);
 
 // CSV FILE READ TO LOAD DATA INTO DB
 // const fs = require('fs');
@@ -70,7 +71,7 @@ app.use(cors(corsOptions));
 
 mongoose.connect(mongo.uri, {useNewUrlParser : true, useUnifiedTopology : true})
     .then(() => {
-        server.listen(PORT, () => {
+        server.listen(PORT, () => {~
             console.log(`Server runnin on ${PORT}`);
             //util();
         })
