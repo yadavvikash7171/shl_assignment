@@ -1,6 +1,14 @@
 const projectService = {};
 const Project = require('../schema/project');
 
+projectService.getProjects = async() => {
+    try{
+        const projects = await Project.find();
+        return projects;
+    }catch(error){
+        return error;
+    }
+} 
 
 projectService.addProject = async(newProject) => {
     const existingProject = await Project.findOne({title : newProject.title});
